@@ -141,3 +141,8 @@ on e.ManagerId=M.EmpId
 select E.Name as Employee , M.Name as Manager from Employee as E inner join Employee as M
 on e.ManagerId=M.EmpId
 
+select E.Name as Employee ,isnull( M.Name,'No Manager') as Manager from Employee as E left join Employee as M
+on e.ManagerId=M.EmpId
+
+
+
