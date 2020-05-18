@@ -21,6 +21,7 @@ select * from Student where EnrollmentNumber='12345678'
 select * from Student where EnrollmentNumber!='12345678'
 select * from Student where EnrollmentNumber<>'12345678'
 select * from Student where EnrollmentNumber in ('12345678','12345677','12345679')
+select * from Student where EnrollmentNumber not in ('12345678','12345677','12345679')
 select * from Student where EnrollmentNumber ='12345634' or EnrollmentNumber ='12345677' or EnrollmentNumber ='12345688'
 Select * from Student where Age between 20 and 25
 select * from Student where Age>=20 and Age<=25
@@ -53,4 +54,90 @@ select Name,City ,count(*) as Counts from Student group by Name,City having Coun
 
 
 
+
+
+
+
+
+
+
+/*--Set Operators--
+	Union All
+	Union 
+	Intersect
+	Except
+*/
+
+select * from DUStudent
+Union all
+select * from IgnouStudent
+
+select * from DUStudent where city='Ghaziabad'
+Union
+select * from IgnouStudent where city='Ghaziabad'
+
+
+select * from DUStudent
+Intersect
+select * from IgnouStudent
+
+
+select * from DUStudent
+except
+select * from IgnouStudent
+
+
+
+
+/* Joins 
+	Join
+	Inner Join
+	Outer Join		
+		Left Outer Join or left join
+		Right Outer Join or right join
+		Full Outer Join or full join
+*/
+
+select * from DuStudent join Course
+on DuStudent.Course = Course.CourseId
+
+--or
+
+select * from DuStudent as A inner join Course as C
+on A.Course = C.CourseId
+
+
+select * from DuStudent as A left join Course as C
+on A.Course = C.CourseId
+
+select * from DuStudent as A right join Course as C
+on A.Course = C.CourseId
+
+
+select * from DuStudent as A full join Course as C
+on A.Course = C.CourseId
+
+
+--left table non matching data
+select * from DuStudent as A left join Course as C
+on A.Course = C.CourseId
+where A.Course is null
+
+--right table non matching data
+select * from DuStudent as A right join Course as C
+on A.Course = C.CourseId
+where A.Course is null
+
+--both table non matching data
+select * from DuStudent as A full join Course as C
+on A.Course = C.CourseId
+where A.Course is null
+
+
+--special join ->self join (join on the same table)
+select E.Name as Employee , M.Name as Manager from Employee as E left join Employee as M
+on e.ManagerId=M.EmpId
+
+select E.Name as Employee , M.Name as Manager from Employee as E inner join Employee as M
+on e.ManagerId=M.EmpId
 
