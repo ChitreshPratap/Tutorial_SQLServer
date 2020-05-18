@@ -3,7 +3,7 @@
 alter table Course
 add MinimumCourseCredit integer not null constraint df_Course_MinimumCourseCredit default 4,
 	MaximumCourseCredit integer not null constraint df_Course_MaximumCourseCredit default 8
-
+	Course nvarchar(10) constraint fk_DuStudent_Course foreign key References Course(CourseId)
 
 --Deleting existing columns from table
 alter table Course
