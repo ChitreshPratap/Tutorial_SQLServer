@@ -100,6 +100,9 @@ create table Course
 	constraint uq_Course_CourseName unique (CourseName) --unique (col1,col2,col3)
 )
 
+--create table with same schema as existing table
+select * into MCAIgnouStudent from IgnouStudent where 1<>1
+Select top 0 * into MCAIgnouStudent from IgnouStudent
 
 
 --Renaming Table
