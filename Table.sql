@@ -9,6 +9,7 @@ create table Student
 (
 	--adding nullability and domain constriant
 	[EnrollmentNumber] nvarchar(30) not null,
+
 	[Name] nvarchar(100) not null,
 	[FatherName] nvarchar(100) not null,
 	[AadharCardNo] nvarchar(20) not null,
@@ -18,6 +19,7 @@ create table Student
 
 	--computed column
 	[Age] as year(GetDate()) - year(DOB),
+
 	[Address] nvarchar(500) not null,
 	[City] nvarchar(100) not null,
 	[ZipCode] nvarchar(10) not null,
@@ -67,10 +69,12 @@ create table Student
 	[ContactNumber] nvarchar(10) null,
 	[Email] nvarchar(100) not null,
 
+	--default constraint
 	[DOB] Date not null constraint df_Student_DOB default '01-Jan-1991',
 
 	--computed column
 	[Age] as year(getDate())- year(DOB)  ,
+
 	[Address] nvarchar(500) not null,
 	[City] nvarchar(100) not null,
 
