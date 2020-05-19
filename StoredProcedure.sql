@@ -23,28 +23,19 @@ print @employeeCount
 stored procedure always return only single integer value(show execution status)-> zero-successfully executes, non-zero - failed
 	return keyword is used to return integer.
 Stored Procedure with output parameter can give any number of value of any datatype
-
-create proc/procedure spProdcedureName @gender nvarchar(10)
-	with Encryption -->It will encrpt the text of the stored procedure so that no body can look into it.
-	as
-	begin
-		return (select Count(id) from Employee where gender=@gender)
-	end
-
-declare @empCount int
-exec/execute @empCount=spProcedureName @gender='Male'
-print @empCount
-
 */
 
-create procedure spGetCourseCount @courseId nvarchar(20)
+create proc spProcedureName @gender nvarchar(20), @dptId int,@empCount int out/Output,@defParameter int=5
+	with Encryption
 	as
-	begin		
-		select * from Course where CourseId=@courseId
-	end	
+		Begin
+			select @empCount=count(*) from Employee where gender =@gender or departmentId=@dptId
+			return @defParameter 
+		End
 
-
-exec spGetCourseCount 'BCA'
+declare @employeeCount int
+execute spProcedureName @gender='Male',@dptId='12345',@empCount=@employeeCount out
+print @employeeCount
 
 --Droping Stored Procedure
 --Drop proc/Procedure spProcedureName
@@ -62,6 +53,10 @@ Alter proc/procedure spProcedureName
 	End
 */
 
---sp_helpText procedureName
---sp_help
---sp_depends
+alter proc spProcedureName @gender nvarchar(20), @dptId int,@empCount int out/Output,@defParameter int=5
+	with Encryption
+	as
+		Begin
+			select @empCount=count(*) from Employee where gender =@gender or departmentId=@dptId
+			return @defParameter 
+		End
