@@ -51,6 +51,10 @@ select top 5 name,city from student
 --Group by and having
 select Name,City ,count(*) as Counts from Student group by Name,City
 select Name,City ,count(*) as Counts from Student group by Name,City having Count(*)<5
+select month(enterDate) as enterMonth from work group by enterMonth
+	X - Error - because Group by clause processed before select list so, enterMonth column will not available to group by.
+	Solution - Derived Table
+
 
 
 
@@ -146,3 +150,32 @@ on e.ManagerId=M.EmpId
 
 
 
+/*-- Derived Tables
+Derived table is example of sub-query which always in From clause of Outer query and function as table for outer query. Derived tables are the result of inner query which work as a table for outer query.
+Derived tables are the table expression (or temporary table) which are created on the fly (or in memory) with the help of SELECT statement and appears (or used or available) in FROM clause of outer query.
+
+Scope :-
+	Derived tables are limited (or available) to the outer select query only which created it. It cann't be used outside the scope of outside of the outer select query and drop automatically outside of it. so, derived tables are not part of db schema and not a real table.
+	Derived tables are the result of inner query which work as a table for outer query.
+
+uses :-
+	Derived tables can be used to shorten long queries and to break complex process into logical steps
+	Derived tables are good alternative of temporary tables
+	Derived tables are used when use of column aliases are not possible because another clause is processed by sql translator before the alias name is processed.
+		Eg :- Select month(enterDate) as EnterMonth from work group by enterMonth
+		X - > here group by clause is processed before select statement so, alias name is not available to the group by clause hence error
+		solution -> use drived table
+		
+Syntex of of creating and using Derived Tables:-
+
+Select * from (derived table select statement) where <>
+
+*/
+--drived table as inner sub query and it' is using in outer select query.
+Select * from (
+				Select FilmName, FilmRuntimeMinutes from Tbl Film
+			) where FilmRuntimeMinutes < 100
+
+select EnterMonth from 
+	(select month(enterDate) as enterMonth from work) as dt
+	group by enterMonth
