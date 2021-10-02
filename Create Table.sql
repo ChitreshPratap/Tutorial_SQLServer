@@ -42,3 +42,20 @@ create table Employee
 	--default constraint is not applied in this way in create table statement, we should implement default constraint inline
 	--constraint df_employee_age default (18) for [Age]
 )
+
+--renaming table
+sp_rename 'Bank', 'Bnk'
+
+
+--Adding column to already existing table
+alter table Bnk
+	add BranchName nvarchar(100) not null,
+		BranchLocation nvarchar(100) not null
+
+--changing name,dataype,nullability of column
+alter table Bnk
+	alter column IFSC nvarchar(50) not null
+
+
+--Renaming column name of table
+Exec sp_rename 'Bnk.IFSC', 'IFSCCode','COLUMN'
